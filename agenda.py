@@ -20,6 +20,9 @@ agenda = {
     "santiago": 5004512,
     "julian": 3005487,
 }
+
+listAgenda = []
+
 def solo_letras(cadena):
     return cadena.isalpha()
 
@@ -33,7 +36,8 @@ while True:
     print("2. Buscar un contacto por su nombre")
     print("3. Mostrar todos los contactos")
     print("4. Eliminar un contacto")
-    print("5. Salir del programa...")
+    print("5. Actualizar un contacto")
+    print("6. Salir del programa...")
     
     opcion = input("Elige una Opcion: ")
     
@@ -54,6 +58,11 @@ while True:
                     print("Solo se permiten numeros enteros")
                     
             agenda[newContac] = newNum
+
+            listDic = {newContac : newNum}
+            listAgenda.insert(0,listDic)
+            print(listAgenda)
+
             print(f"El contacto {newContac} se ha agregado con el numero {newNum}")
               
             
@@ -63,11 +72,17 @@ while True:
                 findName = input("Coloca el nombre del contacto que deseas buscar: ").lower()
                 if findName in agenda:
                     print(f"\n El contacto {findName} tiene el numero {agenda[findName]}")
+                    findName1 = findName         
+                    print(f"\n El contacto1 es:", listAgenda[{findName1}]  )
                     break
                 else:
                     print("El contacto no existe")
+                
+            
+
         case "3":
-            print(agenda)
+            print (agenda)
+            print (listAgenda)
         case "4":
             while True:
                 delName = input("Coloca el nombre del contacto que deseas borrar: ").lower()
@@ -78,6 +93,33 @@ while True:
                 else:
                     print("El contacto no existe")
         case "5":
+            while True:
+                findName = input("Coloca el nombre del contacto que deseas actualizar: ").lower()
+                if findName in agenda:
+                    print(f"\n El contacto que se va a actualizar es: {findName}: {agenda[findName]}")
+                    del agenda[findName]
+                    break
+                else:
+                    print("El contacto no existe")
+            
+            while True:
+                newContac = input("\n Agrega el nombre que deseas actualizar: ").lower()
+                if solo_letras(newContac):
+                    break
+                else:
+                    print("solo se permiten letras")
+
+            while True:
+                newNum = input("\n Agrega el numero que deseas actualizar: ")
+                if validar_numero(newNum):
+                    break
+                else:
+                    print("Solo se permiten numeros enteros")
+                    
+            agenda[newContac] = newNum
+            print(f"El contacto {newContac} se ha actualizado con el numero {newNum}")
+
+        case "6":
             break
         case _:
             print("Opcion no valida, por favor elige una Opcion del menu.")
